@@ -14,8 +14,11 @@ func main() {
 	config.ConnectDatabase()
 
 	// Middleware
-	app.Use(cors.New())
-
+	app.Use(cors.New(cors.Config{
+		AllowOrigins: "*",
+		AllowMethods: "GET,POST,HEAD,PUT,DELETE,OPTIONS",
+		AllowHeaders: "Origin, Content-Type, Accept, Authorization",
+	}))
 	// Routes
 	app.Post("/login", controllers.LoginUser)
 	app.Post("/register", controllers.RegisterUser)
